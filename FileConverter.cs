@@ -24,7 +24,7 @@ namespace ZipToPdfConverter
             _wordFileTypes = new List<string> { ".docx", "doc" };
             _powerPointFileTypes = new List<string> { ".pptx", ".ppt" };
         }
-        
+
         public void ConvertZipToPdf(string docPath)
         {
             string tempDirectory = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
@@ -32,25 +32,32 @@ namespace ZipToPdfConverter
 
             ZipFile.ExtractToDirectory(docPath, tempDirectory);
 
+            string destDir = Path.Combine(tempDirectory, Path.GetFileName(docPath.RemoveRightToChar("-")));
+
+            Directory.CreateDirectory(destDir);
+            
+
             foreach (string filePath in Directory.GetFiles(tempDirectory))
             {
                 if (!_wordFileTypes.Concat(_powerPointFileTypes).Contains(Path.GetExtension(filePath)))
+                {
+                    File.Move(filePath, Path.Combine(destDir, Path.GetFileName(filePath)));
                     continue;
+                }
+                    
                 
+                string newFilePath = filePath.Replace(Path.GetExtension(filePath), ".pdf");
                 if (_wordFileTypes.Contains(Path.GetExtension(filePath)))
-                    ConvertWordToPdf(filePath, filePath.Replace(Path.GetExtension(filePath), ".pdf"));
+                    ConvertWordToPdf(filePath, newFilePath);
                 else
-                    ConvertPowerPointToPdf(filePath, filePath.Replace(Path.GetExtension(filePath), ".pdf"));
+                    ConvertPowerPointToPdf(filePath, newFilePath);
 
                 File.Delete(filePath);
+                File.Move(newFilePath, Path.Combine(destDir, Path.GetFileName(newFilePath)));
             }
 
-            int dashIndex = docPath.IndexOf("-", StringComparison.Ordinal);
+            string outputDir = docPath.RemoveRightToChar("-") + ".zip";
 
-            string outputDir = docPath;
-            if (dashIndex >= 0)
-                outputDir = docPath.Substring(0, dashIndex) + ".zip";
-            
             if (File.Exists(outputDir))
                 File.Delete(outputDir);
             
