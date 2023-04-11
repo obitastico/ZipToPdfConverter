@@ -41,3 +41,6 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+
+/install_zip_to_pdf_local.reg
+/uninstall_zip_to_pdf_local.reg
