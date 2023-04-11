@@ -1,0 +1,7 @@
+﻿Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.zip\shell\ZipToPdf]
+"MUIVerb"="Convert Zip To Pdf"
+
+[HKEY_CURRENT_USER\Software\Classes\SystemFileAssociations\.zip\shell\ZipToPdf\command]
+@="cmd /k \"\"E:\\Programmieren\\RiderProjects\\ZipToPdfConverter\\bin\\Debug\\ZipToPdfConverter.exe\" \"%1\"\""
