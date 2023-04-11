@@ -64,7 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="install_zip_to_pdf.reg" />
+    <Content Include="install_zip_to_pdf_local.reg" />
     <Content Include="uninstall_zip_to_pdf.reg" />
+    <Content Include="uninstall_zip_to_pdf_local.reg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
