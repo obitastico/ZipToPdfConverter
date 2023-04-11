@@ -44,8 +44,7 @@ namespace ZipToPdfConverter
                     File.Move(filePath, Path.Combine(destDir, Path.GetFileName(filePath)));
                     continue;
                 }
-                    
-                
+
                 string newFilePath = filePath.Replace(Path.GetExtension(filePath), ".pdf");
                 if (_wordFileTypes.Contains(Path.GetExtension(filePath)))
                     ConvertWordToPdf(filePath, newFilePath);
