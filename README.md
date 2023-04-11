@@ -12,7 +12,11 @@ Well then this Project is exactly for you (yes im lookin at you (you know you're
 
 ## Who to use?
 
-Person looked at, dm me, the rest: 
+### Requirements
+You need to have the Word and PowerPoint Interop assembly.
+
+### Installation
+Person looked at, dm me, the rest:
 
 1. Build the Project with VS or Rider idc
 2. Get the path of your executable 
