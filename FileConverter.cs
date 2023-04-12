@@ -38,13 +38,13 @@ namespace ZipToPdfConverter
 
             foreach (string filePath in Directory.GetFiles(tempDirectory))
             {
+                string newFilePath = filePath.UpdateFileName();
                 if (!_wordFileTypes.Concat(_powerPointFileTypes).Contains(Path.GetExtension(filePath)))
                 {
-                    File.Move(filePath, Path.Combine(destDir, Path.GetFileName(filePath)));
+                    File.Move(filePath, Path.Combine(destDir, Path.GetFileName(newFilePath)));
                     continue;
                 }
 
-                string newFilePath = filePath.Replace(Path.GetExtension(filePath), ".pdf");
                 if (_wordFileTypes.Contains(Path.GetExtension(filePath)))
                     ConvertWordToPdf(filePath, newFilePath);
                 else
