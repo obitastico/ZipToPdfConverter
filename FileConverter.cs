@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Threading;
 using Microsoft.Office.Core;
 using Word = Microsoft.Office.Interop.Word;
 using PowerPoint = Microsoft.Office.Interop.PowerPoint;
@@ -31,7 +33,7 @@ namespace ZipToPdfConverter
 
             ZipFile.ExtractToDirectory(docPath, tempDirectory);
 
-            string destDir = Path.Combine(tempDirectory, Path.GetFileName(docPath.RemoveRightToChar("-")));
+            string destDir = Path.Combine(tempDirectory, Path.GetFileName(docPath.RemoveRightToChar("-"))).TrimEnd();
 
             Directory.CreateDirectory(destDir);
             
@@ -49,9 +51,11 @@ namespace ZipToPdfConverter
                     ConvertWordToPdf(filePath, newFilePath);
                 else
                     ConvertPowerPointToPdf(filePath, newFilePath);
-
+                
                 File.Delete(filePath);
-                File.Move(newFilePath, Path.Combine(destDir, Path.GetFileName(newFilePath)));
+                Thread.Sleep(1000);
+                var path = Path.Combine(destDir, Path.GetFileName(newFilePath));
+                File.Move(newFilePath, path);
             }
 
             string outputDir = docPath.RemoveRightToChar("-") + ".zip";
