@@ -53,7 +53,7 @@ namespace ZipToPdfConverter
                     ConvertPowerPointToPdf(filePath, newFilePath);
                 
                 File.Delete(filePath);
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
                 var folderFilePath = Path.Combine(destDir, Path.GetFileName(newFilePath));
                 if (File.Exists(folderFilePath))
                 {
