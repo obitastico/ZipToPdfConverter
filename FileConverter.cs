@@ -58,7 +58,7 @@ namespace ZipToPdfConverter
                 if (File.Exists(folderFilePath))
                 {
                     folderFilePath = folderFilePath.Insert(
-                        folderFilePath.IndexOf("[", StringComparison.Ordinal) - 1, 
+                        folderFilePath.IndexOf("[", StringComparison.Ordinal), 
                         _wordFileTypes.Contains(Path.GetExtension(filePath)) ? "(docx) " : "(pptx) ");
                 }
                 
