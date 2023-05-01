@@ -54,8 +54,16 @@ namespace ZipToPdfConverter
                 
                 File.Delete(filePath);
                 Thread.Sleep(1000);
-                var path = Path.Combine(destDir, Path.GetFileName(newFilePath));
-                File.Move(newFilePath, path);
+                var folderFilePath = Path.Combine(destDir, Path.GetFileName(newFilePath));
+                if (File.Exists(folderFilePath))
+                {
+                    folderFilePath = folderFilePath.Insert(
+                        folderFilePath.IndexOf("[", StringComparison.Ordinal) - 1, 
+                        _wordFileTypes.Contains(Path.GetExtension(filePath)) ? "(docx) " : "(pptx) ");
+                }
+                
+                File.Move(newFilePath, folderFilePath);
+                
             }
 
             string outputDir = docPath.RemoveRightToChar("-") + ".zip";
