@@ -22,8 +22,8 @@ namespace ZipToPdfConverter
         {
             WordApplication = new Word.Application { Visible = false };
             PowerPointApplication = new PowerPoint.Application();
-            _wordFileTypes = new List<string> { ".docx", "doc" };
-            _powerPointFileTypes = new List<string> { ".pptx", ".ppt" };
+            _wordFileTypes = new List<string> { ".docx", ".doc", ".odt" };
+            _powerPointFileTypes = new List<string> { ".pptx", ".ppt", ".pptm" };
         }
 
         public void ConvertZipToPdf(string docPath)
